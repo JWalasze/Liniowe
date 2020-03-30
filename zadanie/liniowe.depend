@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1585499226 source:/home/user/Pulpit/programy/liniowe/src/Macierz.cpp
+	"../inc/Macierz.hh"
+
+1585499364 /home/user/Pulpit/programy/liniowe/inc/Macierz.hh
+	"rozmiar.h"
+	<iostream>
+
+1520771284 /home/user/Pulpit/programy/liniowe/inc/rozmiar.h
+
+1585499226 source:/home/user/Pulpit/programy/liniowe/src/UkladRownanLiniowych.cpp
+	"../inc/UkladRownanLiniowych.hh"
+
+1520771284 /home/user/Pulpit/programy/liniowe/inc/UkladRownanLiniowych.hh
+	<iostream>
+
+1585499226 source:/home/user/Pulpit/programy/liniowe/src/Wektor.cpp
+	"../inc/Wektor.hh"
+
+1520771284 /home/user/Pulpit/programy/liniowe/inc/Wektor.hh
+	"rozmiar.h"
+	<iostream>
+
+1585499431 source:/home/user/Pulpit/programy/liniowe/src/main.cpp
+	<iostream>
+	"../inc/Macierz.hh"
+	"../inc/UkladRownanLiniowych.hh"
+	"../inc/Wektor.hh"
+
