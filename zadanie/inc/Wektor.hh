@@ -3,21 +3,39 @@
 
 #include "rozmiar.h"
 #include <iostream>
+#include <cmath>
+
+using namespace std;
 
 
-/*
- *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
- *  i jakie ma glowne cechy.
- */
 class Wektor {
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
-   */
+
+   double tab[ROZMIAR];
+
   public:
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
-   */    
+
+   Wektor();
+
+   Wektor(double tablica[]);
+
+   Wektor(double x, double y, double z);
+
+   const Wektor & operator + (const Wektor & W2) const;
+   const Wektor & operator - (const Wektor & W2) const;
+   const Wektor & operator * (double l) const;
+   double operator * (const Wektor & W2) const; //skalarnie
+   const Wektor & operator / (double l) const;
+
+   double dlugosc() const;
+
+   bool operator == (const Wektor & W2) const;
+   bool operator != (const Wektor & W2) const;
+
+   const double & operator [] (int index) const;
+   double & operator [] (int index);
 };
+
+Wektor operator *(double l, Wektor W2);
 
 
 /*
@@ -25,7 +43,7 @@ class Wektor {
  * danych akceptuje. Jakie jest znaczenie parametrow itd.
  * Szczegoly dotyczace zalecen realizacji opisow mozna
  * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
+ *    ~bk/edu/kpo/zalecenia.txt
  */
 std::istream& operator >> (std::istream &Strm, Wektor &Wek);
 
@@ -34,8 +52,11 @@ std::istream& operator >> (std::istream &Strm, Wektor &Wek);
  * danych akceptuje. Jakie jest znaczenie parametrow itd.
  * Szczegoly dotyczace zalecen realizacji opisow mozna
  * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
+ *    ~bk/edu/kpo/zalecenia.txt
  */
 std::ostream& operator << (std::ostream &Strm, const Wektor &Wek);
+
+
+
 
 #endif
