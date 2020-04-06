@@ -27,9 +27,10 @@
 	"../inc/UkladRownanLiniowych.hh"
 	"../inc/Wektor.hh"
 
-1586168004 source:/home/user/Pulpit/Liniowe/zadanie/src/Macierz.cpp
+1586174379 source:/home/user/Pulpit/Liniowe/zadanie/src/Macierz.cpp
 	"Wektor.hh"
 	"Macierz.hh"
+	"cassert"
 
 1586101265 /home/user/Pulpit/Liniowe/zadanie/inc/Macierz.hh
 	"rozmiar.h"
@@ -38,7 +39,7 @@
 
 1520771284 /home/user/Pulpit/Liniowe/zadanie/inc/rozmiar.h
 
-1586168096 source:/home/user/Pulpit/Liniowe/zadanie/src/main.cpp
+1586174561 source:/home/user/Pulpit/Liniowe/zadanie/src/main.cpp
 	<iostream>
 	"Macierz.hh"
 	"UkladRownanLiniowych.hh"

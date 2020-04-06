@@ -1,5 +1,6 @@
 #include "Wektor.hh"
 #include "Macierz.hh"
+#include "cassert"
 
 
 /*
@@ -58,7 +59,8 @@ std::istream& operator >> (std::istream &Strm, MacierzKw &Mac)
 
 Wektor & MacierzKw::operator[] (int index)
 {
-return this->tab[index];
+    assert(index < ROZMIAR && index >= 0);
+    return this->tab[index];
 }
 
 const MacierzKw & MacierzKw::operator + (const MacierzKw & M2)
@@ -99,17 +101,7 @@ const MacierzKw & MacierzKw::operator * (double l)
 
 const MacierzKw & MacierzKw::transponuj() const
 {
-    Wektor tablica[ROZMIAR];
-    for(int j=0; j<ROZMIAR; j++)
-    {
-        for(int i=0; i<ROZMIAR; i++)
-        {
-             tablica[i][j] = this->tab[i][j];
-        }
-    }
-    MacierzKw Mac(tablica);
-    MacierzKw &RefMac = Mac;
-    return RefMac;
+    return *this;
 }
 void MacierzKw::transponuj()
 {

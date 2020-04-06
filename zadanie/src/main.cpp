@@ -24,6 +24,9 @@ int main()
   Wektor W3(1,3,2);
 
   MacierzKw Mac1(W1, W2, W3);
+
+  cout << Mac1 << endl;
+   Mac1.transponuj();
   cout << Mac1 << endl;
 
   cout << Mac1.wyznacznik() << endl;
