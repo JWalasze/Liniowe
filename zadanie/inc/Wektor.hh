@@ -10,53 +10,35 @@ using namespace std;
 
 class Wektor {
 
-   double tab[ROZMIAR];
+    double tab[ROZMIAR];
 
   public:
 
-   Wektor();
+    Wektor();
 
-   Wektor(double tablica[]);
+    Wektor(double tablica[]);
 
-   Wektor(double x, double y, double z);
+    Wektor(double x, double y, double z);
 
-   const Wektor & operator + (const Wektor & W2) const;
-   const Wektor & operator - (const Wektor & W2) const;
-   const Wektor & operator * (double l) const;
-   double operator * (const Wektor & W2) const; //skalarnie
-   const Wektor & operator / (double l) const;
+    Wektor operator + (const Wektor & W2) const;
+    Wektor operator - (const Wektor & W2) const;
+    Wektor operator * (double l) const;
+    double operator * (const Wektor & W2) const; //skalarnie
+    Wektor operator / (double l) const;
 
-   double dlugosc() const;
+    double dlugosc() const;
 
-   bool operator == (const Wektor & W2) const;
-   bool operator != (const Wektor & W2) const;
+    bool operator == (const Wektor & W2) const;
+    bool operator != (const Wektor & W2) const;
 
-   const double & operator [] (int index) const;
-   double & operator [] (int index);
+    const double & operator [] (int index) const;
+    double & operator [] (int index);
 };
 
-Wektor operator *(double l, Wektor W2);
+Wektor operator * (double l, Wektor W2);
 
+std::istream & operator >> (std::istream &Strm, Wektor &Wek);
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt
- */
-std::istream& operator >> (std::istream &Strm, Wektor &Wek);
-
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt
- */
-std::ostream& operator << (std::ostream &Strm, const Wektor &Wek);
-
-
-
+std::ostream & operator << (std::ostream &Strm, const Wektor &Wek);
 
 #endif

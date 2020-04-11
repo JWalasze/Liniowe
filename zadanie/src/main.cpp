@@ -19,30 +19,34 @@ int main()
 {
   //UkladRownanLiniowych   UklRown;   // To tylko przykladowe definicje zmiennej
 
-  Wektor W1(2,-4,1);
-  Wektor W2(-1,2,3);
-  Wektor W3(1,3,2);
+  Wektor W1(2,-2,-2);
+  Wektor W3(5,2,3);
+  Wektor W4(-1,3,4);
+  Wektor W5(1,4,5);
+  Wektor W6(9,8.5,8);
+  Wektor W7(1,4,1);
+  Wektor W8(2,3,1);
 
-  MacierzKw Mac1(W1, W2, W3);
+  Wektor W9(1,1,1);
+  Wektor W10(-2,8,4);
+  Wektor W11(9,8.5,8);
 
-  cout << Mac1 << endl;
-   Mac1.transponuj();
-  cout << Mac1 << endl;
-
-  cout << Mac1.wyznacznik() << endl;
-
-  Mac1.rzad();
-
-
-cin >> Mac1;
-cout << Mac1;
-
-
-
+  MacierzKw M(W1,W3,W4);
+  cout << M << endl;
+  M.odwroc();
+  cout << M << endl;
+  Wektor W = M * W10;
+  cout << W;
 
 
 
 
-  cout << endl << " Start programu " << endl << endl;
+
+
+
+
+
+
+
 }
 

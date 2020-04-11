@@ -10,17 +10,19 @@
 
 Wektor::Wektor()
 {
-   this->tab[0]=0;
-   this->tab[1]=0;
-   this->tab[2]=0;
+   for(int i=0; i<ROZMIAR; i++)
+    {
+        this->tab[i]=0;
+    }
 }
 
 Wektor::Wektor(double tablica[])
-   {
-   this->tab[0]=tablica[0];
-   this->tab[1]=tablica[1];
-   this->tab[2]=tablica[2];
-   }
+{
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        this->tab[i]=tablica[i];
+    }
+}
 
 Wektor::Wektor(double x, double y, double z)
    {
@@ -63,73 +65,62 @@ double Wektor::operator * (const Wektor & W2) const //SKALARNIE
    return Wynik;
 }
 
-const Wektor & Wektor::operator + (const Wektor & W2) const
- {
-    double tablica[ROZMIAR];
-
+Wektor Wektor::operator + (const Wektor & W2) const
+{
+    Wektor Wynik;
     for(int i=0; i<ROZMIAR; i++)
     {
-    tablica[i]=this->tab[i] + W2[i];
+        Wynik[i]=this->tab[i] + W2[i];
     }
-    Wektor W1(tablica);
-    Wektor & RefW = W1;
-    return RefW;
- }
-
-const Wektor & Wektor::operator - (const Wektor & W2) const
-{
-   double tablica[ROZMIAR];
-
-   for(int i=0; i<ROZMIAR; i++)
-   {
-   tablica[i]=this->tab[i] - W2[i];
-   }
-   Wektor W1(tablica);
-   Wektor & RefW = W1;
-   return RefW;
+    return Wynik;
 }
 
-const Wektor & Wektor::operator * (double l) const
+Wektor Wektor::operator - (const Wektor & W2) const
 {
-   double tablica[ROZMIAR];
-
-   for(int i=0; i<ROZMIAR; i++)
-   {
-   tablica[i]=this->tab[i] * l;
-   }
-   Wektor W1(tablica);
-   Wektor & RefW = W1;
-   return RefW;
+    Wektor Wynik;
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        Wynik[i]=this->tab[i] - W2[i];
+    }
+    return Wynik;
 }
 
-const Wektor & Wektor::operator / (double l) const
+Wektor Wektor::operator * (double l) const
 {
-   double tablica[ROZMIAR];
+    Wektor Wynik;
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        Wynik[i]=this->tab[i] * l;
+    }
+    return Wynik;
+}
 
-   for(int i=0; i<ROZMIAR; i++)
-   {
-   tablica[i]=this->tab[i] / l;
-   }
-   Wektor W1(tablica);
-   Wektor & RefW = W1;
-   return RefW;
+Wektor Wektor::operator / (double l) const
+{
+    Wektor Wynik;
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        assert(l!=0);
+        Wynik[i]=this->tab[i] / l;
+    }
+    return Wynik;
 }
 
 bool Wektor::operator == (const Wektor & W2) const
 {
-   if(this->tab[0]==W2[0] && this->tab[1]==W2[1] && this->tab[2]==W2[2])
-   {
-   return true;
-   }
-   else
-   {
-   return false;
-   }
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        if( this->tab[i]!= W2[i])
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 bool Wektor::operator != (const Wektor & W2) const
 {
-   if(this->tab[0]==W2[0] && this->tab[1]==W2[1] && this->tab[2]==W2[2])
+   if(*this==W2)
    {
    return false;
    }
@@ -143,7 +134,7 @@ std::ostream& operator << (std::ostream &Strm, const Wektor &Wek)
 {
    for(int i=0; i<ROZMIAR; i++)
    {
-   Strm << Wek[i] << "  ";
+   Strm << Wek[i] << endl;
    }
    Strm << endl;
    return Strm;
@@ -160,8 +151,5 @@ std::istream& operator >> (std::istream &Strm, Wektor &Wek)
 
 Wektor operator * (double l, Wektor W2)
 {
-   return Wektor(W2)*l;
+   return W2*l;
 }
-
-
-

@@ -2,22 +2,23 @@
 #include "Macierz.hh"
 #include "cassert"
 
+using namespace std;
 
-/*
- *  Tutaj nalezy zdefiniowac odpowiednie metody
- *  klasy Macierz, ktore zawieraja wiecej kodu
- *  niz dwie linijki.
- *  Mniejsze metody mozna definiwac w ciele klasy.
- */
-
-
+MacierzKw::MacierzKw()
+{
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        this->tab[i]= Wektor();
+    }
+}
 
 MacierzKw::MacierzKw(const Wektor tablica[])
   {
-   this->tab[0]=tablica[0];
-   this->tab[1]=tablica[1];
-   this->tab[2]=tablica[2];
-  }
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        this->tab[i]=tablica[i];
+    }
+}
 
 MacierzKw::MacierzKw(Wektor A, Wektor B, Wektor C)
   {
@@ -30,6 +31,12 @@ MacierzKw::MacierzKw(Wektor A, Wektor B, Wektor C)
 const Wektor & MacierzKw::operator[] (int index) const
 {
   return this->tab[index];
+}
+
+Wektor & MacierzKw::operator[] (int index)
+{
+    assert(index < ROZMIAR && index >= 0);
+    return this->tab[index];
 }
 
 std::ostream& operator << (std::ostream &Strm, const MacierzKw &Mac)
@@ -49,54 +56,39 @@ std::istream& operator >> (std::istream &Strm, MacierzKw &Mac)
 {
     for(int i=0; i<ROZMIAR; i++)
     {
-        for(int j=0; j<ROZMIAR; j++)
-        {
-            Strm >> Mac[i][j];
-        }
+        Strm >> Mac[i];
     }
     return Strm;
 }
 
-Wektor & MacierzKw::operator[] (int index)
+MacierzKw MacierzKw::operator + (const MacierzKw & M2)
 {
-    assert(index < ROZMIAR && index >= 0);
-    return this->tab[index];
-}
-
-const MacierzKw & MacierzKw::operator + (const MacierzKw & M2)
-{
-    Wektor tablica[ROZMIAR];
+    MacierzKw Wynik;
     for(int i=0; i<ROZMIAR; i++)
     {
-        tablica[i] = this->tab[i] + M2[i];
+        Wynik[i] = this->tab[i] + M2[i];
     }
-    MacierzKw Mac(tablica);
-    MacierzKw &RefMac = Mac;
-    return RefMac;
+    return Wynik;
 }
 
-const MacierzKw & MacierzKw::operator - (const MacierzKw & M2)
+MacierzKw MacierzKw::operator - (const MacierzKw & M2)
 {
-    Wektor tablica[ROZMIAR];
+    MacierzKw Wynik;
     for(int i=0; i<ROZMIAR; i++)
     {
-        tablica[i] = this->tab[i] - M2[i];
+        Wynik[i] = this->tab[i] - M2[i];
     }
-    MacierzKw Mac(tablica);
-    MacierzKw &RefMac = Mac;
-    return RefMac;
+    return Wynik;
 }
 
-const MacierzKw & MacierzKw::operator * (double l)
+MacierzKw MacierzKw::operator * (double l)
 {
-    Wektor tablica[ROZMIAR];
+    MacierzKw Wynik;
     for(int i=0; i<ROZMIAR; i++)
     {
-        tablica[i] = this->tab[i] * l;
+        Wynik[i] = this->tab[i] * l;
     }
-    MacierzKw Mac(tablica);
-    MacierzKw &RefMac = Mac;
-    return RefMac;
+    return Wynik;
 }
 
 const MacierzKw & MacierzKw::transponuj() const
@@ -105,75 +97,77 @@ const MacierzKw & MacierzKw::transponuj() const
 }
 void MacierzKw::transponuj()
 {
-    Wektor tablica[ROZMIAR];
     for(int j=0; j<ROZMIAR; j++)
     {
-        for(int i=0; i<ROZMIAR; i++)
+        for( int i=j; i<ROZMIAR; i++)
         {
-            tablica[i][j] = this->tab[j][i];
-        }
-    }
-    for(int j=0; j<ROZMIAR; j++)
-    {
-        for(int i=0; i<ROZMIAR; i++)
-        {
-           this->tab[i][j] = tablica[i][j];
+            swap( this->tab[i][j], this->tab[j][i] );
         }
     }
 }
 
-const MacierzKw & MacierzKw::operator * (const MacierzKw & M2)
+MacierzKw MacierzKw::operator * (const MacierzKw & M2)
 {
-    MacierzKw W = *this;
-    W.transponuj();
-
-    Wektor tablica[ROZMIAR];
-
+    MacierzKw Wynik;
     for(int i=0; i<ROZMIAR; i++)
     {
         for(int j=0; j<ROZMIAR; j++)
         {
-            tablica[j][i]= W[i] * M2[j];
+            Wynik[j][i]= this->tab[i] * M2[j];
         }
     }
-    MacierzKw Mac(tablica);
-    MacierzKw &RefMac = Mac;
-    return RefMac;
+    return Wynik;
 }
 
-const Wektor & MacierzKw::operator * (const Wektor & W2)
+Wektor MacierzKw::operator * (const Wektor & W2)
 {
-    double tablica[ROZMIAR];
-    MacierzKw W1 = *this;
-    W1.transponuj();
-
+    Wektor Wynik;
     for(int i=0; i<ROZMIAR; i++)
     {
-        tablica[i]= W1[i] * W2;
+        Wynik[i]= this->tab[i] * W2;
     }
-    Wektor W(tablica);
-    Wektor & RefW = W;
-    return RefW;
+    return Wynik;
 }
 
-double MacierzKw::wyznacznik()
+double MacierzKw::wyznacznik() const
 {
-    double Wyzn = -1; //zmiana kolumn przy transponowaniu
-    (*this).transponuj();
+    double Wyzn = 1;
+    MacierzKw M = *this;
     for(int i = 1; i<ROZMIAR; i++)
     {
-        this->tab[i] = this->tab[i] - ( ( this->tab[0] * this->tab[i][ROZMIAR-1] ) / this->tab[0][ROZMIAR-1] ) ;
-        //cout << this->tab[i];
-    }
-    for(int i=ROZMIAR-1; i>1; i--)
-    {
-        this->tab[ROZMIAR-1] = this->tab[ROZMIAR-1] - ( ( this->tab[ROZMIAR-2] * this->tab[ROZMIAR-1][i-1] ) / this->tab[ROZMIAR-2][i-1] ) ;
-        //cout << this->tab[ROZMIAR-1];
+        if( M[0][ROZMIAR-1]==0 )
+        {
+            M[0] = M[0] + M[i];
+        }
+        M[i] = M[i] - ( ( M[0] * M[i][ROZMIAR-1] ) / M[0][ROZMIAR-1] );
+
+        if( i>1 )
+        {
+            for( int x = ROZMIAR - 2; x>=ROZMIAR-i; x--)
+            {
+                int stala=i;
+                if( M[stala-1][x]==0 )
+                {
+                    cout << "Wyznacznik jest rowny zero" << endl << "Macierz osobliwa" << endl;
+                    return 0;
+                }
+
+                M[stala] = M[stala] - ( ( M[stala-1] * M[stala][x] ) / M[stala-1][x] );
+            }
+        }
     }
     for(int i=0; i<ROZMIAR; i++)
     {
-        Wyzn *= this->tab[i][ROZMIAR -1 -i];
+        Wyzn *= M[i][ROZMIAR -1 -i];
     }
+
+    double x = ROZMIAR / 2;
+    int zrzut = static_cast<int>(x);
+    if( zrzut%2==0 || zrzut==1 )
+    {
+        return -1*Wyzn;
+    }
+    else
     return Wyzn;
 }
 
@@ -191,5 +185,84 @@ int MacierzKw::rzad()
     return Wyzn;
 
 }
+
+const MacierzKw & MacierzKw::odwroc() const
+{
+    return *this;
+}
+
+void MacierzKw::odwroc()
+{
+    if((*this).wyznacznik()==0)
+    {
+        cout << "Nie mozna policzyc macierzy odwrotnej" << endl;
+        exit(0);
+    }
+    MacierzKw Odwr;
+    (*this).zamien_kolumny();
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        Odwr[i][ROZMIAR-1-i] = 1;
+    }
+    for(int i = 1; i<ROZMIAR; i++)
+    {
+        if( this->tab[0][ROZMIAR-1]==0 )
+        {
+            this->tab[0] = this->tab[0] + this->tab[i];
+            Odwr[0] = Odwr[0] + Odwr[i];
+        }
+        Odwr[i] = Odwr[i] - ( ( Odwr[0] * this->tab[i][ROZMIAR-1] ) / this->tab[0][ROZMIAR-1] );
+        this->tab[i] = this->tab[i] - ( ( this->tab[0] * this->tab[i][ROZMIAR-1] ) / this->tab[0][ROZMIAR-1] );
+        if( i>1 )
+        {
+            for( int x = ROZMIAR - 2; x>=ROZMIAR-i; x--)
+            {
+                int stala=i;
+                Odwr[stala] = Odwr[stala] - ( ( Odwr[stala-1] * this->tab[stala][x] ) / this->tab[stala-1][x] );
+                this->tab[stala] = this->tab[stala] - ( ( this->tab[stala-1] * this->tab[stala][x] ) / this->tab[stala-1][x] );
+            }
+        }
+    }
+
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        Odwr[i] = Odwr[i] / this->tab[i][ROZMIAR-1-i];
+        this->tab[i] = this->tab[i] / this->tab[i][ROZMIAR-1-i];
+    }
+
+    //drugi trojkat
+
+    for(int i=ROZMIAR-2; i>=0; i--)
+    {
+        Odwr[i] = Odwr[i] - ( ( Odwr[ROZMIAR-1] * this->tab[i][0] ) / this->tab[ROZMIAR-1][0] );
+        this->tab[i] = this->tab[i] - ( ( this->tab[ROZMIAR-1] * this->tab[i][0] ) / this->tab[ROZMIAR-1][0] );
+        if( i<ROZMIAR-2 )
+        {
+            for( int x = 1; x<=ROZMIAR-2; x++)
+            {
+                int stala=i;
+                Odwr[stala] = Odwr[stala] - ( ( Odwr[stala+1] * this->tab[stala][x] ) / this->tab[stala+1][x] );
+                this->tab[stala] = this->tab[stala] - ( ( this->tab[stala+1] * this->tab[stala][x] ) / this->tab[stala+1][x] );
+            }
+        }
+    }
+    *this=Odwr;
+}
+
+void MacierzKw::zamien_kolumny()
+{
+    for(int i=0; i<ROZMIAR/2; i++)
+    {
+        swap( this->tab[i], this->tab[ROZMIAR-1-i] );
+    }
+}
+
+const MacierzKw & MacierzKw::zamien_kolumny() const
+{
+    return *this;
+}
+
+
+
 
 
