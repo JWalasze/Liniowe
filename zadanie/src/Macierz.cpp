@@ -61,7 +61,7 @@ std::istream& operator >> (std::istream &Strm, MacierzKw &Mac)
     return Strm;
 }
 
-MacierzKw MacierzKw::operator + (const MacierzKw & M2)
+MacierzKw MacierzKw::operator + (const MacierzKw & M2) const
 {
     MacierzKw Wynik;
     for(int i=0; i<ROZMIAR; i++)
@@ -71,7 +71,7 @@ MacierzKw MacierzKw::operator + (const MacierzKw & M2)
     return Wynik;
 }
 
-MacierzKw MacierzKw::operator - (const MacierzKw & M2)
+MacierzKw MacierzKw::operator - (const MacierzKw & M2) const
 {
     MacierzKw Wynik;
     for(int i=0; i<ROZMIAR; i++)
@@ -81,7 +81,7 @@ MacierzKw MacierzKw::operator - (const MacierzKw & M2)
     return Wynik;
 }
 
-MacierzKw MacierzKw::operator * (double l)
+MacierzKw MacierzKw::operator * (double l) const
 {
     MacierzKw Wynik;
     for(int i=0; i<ROZMIAR; i++)
@@ -106,7 +106,7 @@ void MacierzKw::transponuj()
     }
 }
 
-MacierzKw MacierzKw::operator * (const MacierzKw & M2)
+MacierzKw MacierzKw::operator * (const MacierzKw & M2) const
 {
     MacierzKw Wynik;
     for(int i=0; i<ROZMIAR; i++)
@@ -119,7 +119,7 @@ MacierzKw MacierzKw::operator * (const MacierzKw & M2)
     return Wynik;
 }
 
-Wektor MacierzKw::operator * (const Wektor & W2)
+Wektor MacierzKw::operator * (const Wektor & W2) const
 {
     Wektor Wynik;
     for(int i=0; i<ROZMIAR; i++)
@@ -171,7 +171,7 @@ double MacierzKw::wyznacznik() const
     return Wyzn;
 }
 
-int MacierzKw::rzad()
+int MacierzKw::rzad() const
 {
     double Wyzn = (*this).wyznacznik();
     if(Wyzn!=0)
@@ -195,7 +195,8 @@ void MacierzKw::odwroc()
 {
     if((*this).wyznacznik()==0)
     {
-        cout << "Nie mozna policzyc macierzy odwrotnej" << endl;
+        cerr << "Nie mozna policzyc macierzy odwrotnej" << endl;
+        cout << "Wyznacznik jest rowny 0!" << endl;
         exit(0);
     }
     MacierzKw Odwr;

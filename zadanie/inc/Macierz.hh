@@ -20,7 +20,7 @@ public:
 
     double wyznacznik() const;// rozwiniecje laplace'a, gaussa, sarrusa
   // double wyznacznikGauss(); double wyznacznik(metoda met = Gauss) <- enum
-    int rzad();
+    int rzad() const;
 
     const MacierzKw & transponuj() const;
     void transponuj();
@@ -28,11 +28,11 @@ public:
     const MacierzKw & odwroc() const;
     void odwroc();
 
-    MacierzKw operator * (const MacierzKw & M2);
-    MacierzKw operator + (const MacierzKw & M2);
-    MacierzKw operator - (const MacierzKw & M2);
-    MacierzKw operator * (double l);
-    Wektor operator * (const Wektor & W2);
+    MacierzKw operator * (const MacierzKw & M2) const;
+    MacierzKw operator + (const MacierzKw & M2) const;
+    MacierzKw operator - (const MacierzKw & M2) const;
+    MacierzKw operator * (double l) const;
+    Wektor operator * (const Wektor & W2) const;
 
     const Wektor & operator[] (int index) const;//wg. 2. propozycji
     Wektor & operator[] (int index); // M[2][0] - zerowy element, drugiego wektora

@@ -134,7 +134,7 @@ std::ostream& operator << (std::ostream &Strm, const Wektor &Wek)
 {
    for(int i=0; i<ROZMIAR; i++)
    {
-   Strm << Wek[i] << endl;
+   Strm << Wek[i] << " ";
    }
    Strm << endl;
    return Strm;
