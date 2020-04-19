@@ -20,35 +20,12 @@ void UkladRownanLiniowych::set_b(const Wektor & bb)
 
 MacierzKw UkladRownanLiniowych::get_A() const
 {
-    std::fstream plik;
-    plik.open("plik.txt");
-
-    if( plik.good()==false )
-    {
-        cout << "Brak takiego pliku" << endl;
-        exit(0);
-    }
-    MacierzKw Macierz;
-    plik >> Macierz;
-    plik.close();
-    return Macierz;
+    return this->A;
 }
 
 Wektor UkladRownanLiniowych::get_b() const
 {
-    std::fstream plik;
-    plik.open("plik.txt");
-
-    if( plik.good()==false )
-    {
-        cout << "Brak takiego pliku" << endl;
-        exit(0);
-    }
-    MacierzKw Macierz;
-    Wektor Wek;
-    plik >> Macierz >> Wek;
-    plik.close();
-    return Wek;
+    return this->b;
 }
 
 Wektor UkladRownanLiniowych::Oblicz() const
@@ -59,6 +36,7 @@ Wektor UkladRownanLiniowych::Oblicz() const
     Wektor Wynik;
 
     Wynik = OdwrA * Wek;
+    Wynik.zamien_kolumny();
 
     return Wynik;
 }
@@ -70,7 +48,12 @@ std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych &UklR
     return Strm;
 }
 
+/*std::istream& operator >> ( std::istream &Strm, UkladRownanLiniowych &UklRown )
+{
+    Strm >>
 
+
+}*/
 
 
 

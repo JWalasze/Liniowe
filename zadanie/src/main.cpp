@@ -4,30 +4,44 @@
 #include "Macierz.hh"
 #include "UkladRownanLiniowych.hh"
 #include "Wektor.hh"
+#include "BladObliczenUkladu.hh"
 
 
 using namespace std;
 
 int main()
 {
-  cout << "Start programu" << endl;
+    cout << "Start programu" << endl;
 
-  UkladRownanLiniowych Ukl;
-  MacierzKw Mac = Ukl.get_A();
-  cout << endl << "Macierz wspolczynnikow - A" << endl;
-  cout << Mac << endl;
+    std::fstream plik;
+    plik.open("plik.txt");
 
-  Wektor Wek = Ukl.get_b();
-  cout << "Wektor wyrazow wolnych - b" << endl;
-  cout << Wek << endl;
+    if( plik.good()==false )
+    {
+        cout << "Brak takiego pliku" << endl;
+        exit(0);
+    }
+    MacierzKw Macierz;
+    Wektor Wek;
+    plik >> Macierz >> Wek;
+    plik.close();
 
-  Ukl.set_A(Mac);
-  Ukl.set_b(Wek);
+    UkladRownanLiniowych Ukl;
+    Ukl.set_A(Macierz);
+    Ukl.set_b(Wek);
+    cout << endl << "Macierz wspolczynnikow - A" << endl;
+    cout << Ukl.get_A() << endl;
 
-  Wektor Wynik = Ukl.Oblicz();
+    cout << "Wektor wyrazow wolnych - b" << endl;
+    cout << Ukl.get_b() << endl;
 
-  cout << "Rozwiazanie x = (x3, x2, x1):" << endl;
-  cout << Wynik;
+    Wektor Wynik = Ukl.Oblicz();
+
+    cout << "Rozwiazanie x = (x1, x2, x3):" << endl;
+    cout << Wynik << endl;
+
+    cout << "Wektor bledu: Ax-b = " << WektorBledu(Ukl) << endl;
+    cout << "Dlugosc wektora bledu: ||Ax-b|| = " << DlugoscWektoraBledu(WektorBledu(Ukl)) << endl;
 
 }
 

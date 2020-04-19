@@ -33,6 +33,9 @@ class Wektor {
 
     const double & operator [] (int index) const;
     double & operator [] (int index);
+
+    const Wektor & zamien_kolumny() const;
+    void zamien_kolumny();
 };
 
 Wektor operator * (double l, Wektor W2);

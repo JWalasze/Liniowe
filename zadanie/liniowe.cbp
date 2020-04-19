@@ -32,10 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="inc/BladObliczenUkladu.hh" />
 		<Unit filename="inc/Macierz.hh" />
 		<Unit filename="inc/UkladRownanLiniowych.hh" />
 		<Unit filename="inc/Wektor.hh" />
 		<Unit filename="inc/rozmiar.h" />
+		<Unit filename="src/BladObliczenUkladu.cpp" />
 		<Unit filename="src/Macierz.cpp" />
 		<Unit filename="src/UkladRownanLiniowych.cpp" />
 		<Unit filename="src/Wektor.cpp" />

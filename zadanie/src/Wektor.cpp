@@ -153,3 +153,20 @@ Wektor operator * (double l, Wektor W2)
 {
    return W2*l;
 }
+
+void Wektor::zamien_kolumny()
+{
+    for(int i=0; i<ROZMIAR/2; i++)
+    {
+        swap( this->tab[i], this->tab[ROZMIAR-1-i] );
+    }
+}
+
+const Wektor & Wektor::zamien_kolumny() const
+{
+    return *this;
+}
+
+
+
+
