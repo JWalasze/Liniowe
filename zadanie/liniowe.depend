@@ -39,7 +39,7 @@
 
 1586550611 /home/user/Pulpit/Liniowe/zadanie/inc/rozmiar.h
 
-1587290358 source:/home/user/Pulpit/Liniowe/zadanie/src/main.cpp
+1587380927 source:/home/user/Pulpit/Liniowe/zadanie/src/main.cpp
 	<iostream>
 	<fstream>
 	<cstdlib>
@@ -58,7 +58,7 @@
 	<iostream>
 	<cmath>
 
-1587289840 source:/home/user/Pulpit/Liniowe/zadanie/src/UkladRownanLiniowych.cpp
+1587381018 source:/home/user/Pulpit/Liniowe/zadanie/src/UkladRownanLiniowych.cpp
 	"UkladRownanLiniowych.hh"
 
 1587289511 source:/home/user/Pulpit/Liniowe/zadanie/src/Wektor.cpp

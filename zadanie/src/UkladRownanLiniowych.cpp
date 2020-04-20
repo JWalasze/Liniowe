@@ -48,14 +48,13 @@ std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych &UklR
     return Strm;
 }
 
-/*std::istream& operator >> ( std::istream &Strm, UkladRownanLiniowych &UklRown )
+std::istream& operator >> ( std::istream &Strm, UkladRownanLiniowych &UklRown )
 {
-    Strm >>
-
-
-}*/
-
-
-
-
+    MacierzKw M;
+    Wektor W;
+    Strm >> M >> W;
+    UklRown.set_A(M);
+    UklRown.set_b(W);
+    return Strm;
+}
 
